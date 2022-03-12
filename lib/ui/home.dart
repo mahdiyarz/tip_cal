@@ -9,6 +9,7 @@ class TipCounter extends StatefulWidget {
 
 class _TipCounterState extends State<TipCounter> {
   double _billAmount = 0.0;
+  int _person = 1;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -23,13 +24,13 @@ class _TipCounterState extends State<TipCounter> {
               height: 150,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(15),
-                color: Colors.amberAccent,
+                color: Colors.amberAccent.shade100,
               ),
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Text('data'),
-                  Text('\$235'),
+                  const Text('data'),
+                  const Text('\$235'),
                 ],
               ),
             ),
@@ -60,6 +61,73 @@ class _TipCounterState extends State<TipCounter> {
                         _billAmount = 0.0;
                       }
                     },
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Split"),
+                      Row(
+                        children: [
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                if (_person > 1) {
+                                  _person--;
+                                } else {
+                                  // do nothing
+                                }
+                              });
+                            },
+                            child: Container(
+                              width: 40,
+                              height: 40,
+                              margin: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.amber.shade100,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: const Center(
+                                  child: Text(
+                                '-',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 25,
+                                ),
+                              )),
+                            ),
+                          ),
+                          Text(
+                            "$_person",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 15,
+                            ),
+                          ),
+                          InkWell(
+                            onTap: () {
+                              setState(() {
+                                _person++;
+                              });
+                            },
+                            child: Container(
+                                width: 40,
+                                height: 40,
+                                margin: const EdgeInsets.all(10),
+                                decoration: BoxDecoration(
+                                  color: Colors.amber.shade100,
+                                  borderRadius: BorderRadius.circular(10),
+                                ),
+                                child: const Center(
+                                  child: Text("+",
+                                      style: TextStyle(
+                                        fontWeight: FontWeight.bold,
+                                        fontSize: 25,
+                                      )),
+                                )),
+                          ),
+                        ],
+                      ),
+                    ],
                   ),
                 ],
               ),
