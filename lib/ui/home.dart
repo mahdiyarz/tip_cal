@@ -11,6 +11,7 @@ class _TipCounterState extends State<TipCounter> {
   double _billAmount = 0.0;
   int _person = 1;
   double _tip = 0.0;
+  int _tipPeresent = 10;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -134,21 +135,43 @@ class _TipCounterState extends State<TipCounter> {
                     ],
                   ),
                   Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text("Tip"),
-                        Padding(
-                          padding: const EdgeInsets.all(10.0),
-                          child: Text(
-                            "\$$_tip",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              fontWeight: FontWeight.bold,
-                              color: Colors.deepOrange,
-                            ),
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text("Tip"),
+                      Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Text(
+                          "\$$_tip",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: Colors.deepOrange,
                           ),
                         ),
-                      ]),
+                      ),
+                    ],
+                  ),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        "$_tipPeresent%",
+                        style: const TextStyle(
+                          fontSize: 25,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.deepOrange,
+                        ),
+                      ),
+                      Slider(
+                        min: 0,
+                        max: 100,
+                        value: _tipPeresent.toDouble(),
+                        onChanged: (double value) {
+                          _tipPeresent = value.round();
+                        },
+                      ),
+                    ],
+                  ),
                 ],
               ),
             ),
