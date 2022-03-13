@@ -10,6 +10,7 @@ class TipCounter extends StatefulWidget {
 class _TipCounterState extends State<TipCounter> {
   double _billAmount = 0.0;
   int _person = 1;
+  double _tip = 0.0;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -92,6 +93,7 @@ class _TipCounterState extends State<TipCounter> {
                                 style: TextStyle(
                                   fontWeight: FontWeight.bold,
                                   fontSize: 25,
+                                  color: Colors.deepOrange,
                                 ),
                               )),
                             ),
@@ -100,7 +102,8 @@ class _TipCounterState extends State<TipCounter> {
                             "$_person",
                             style: const TextStyle(
                               fontWeight: FontWeight.bold,
-                              fontSize: 15,
+                              fontSize: 18,
+                              color: Colors.deepOrange,
                             ),
                           ),
                           InkWell(
@@ -122,6 +125,7 @@ class _TipCounterState extends State<TipCounter> {
                                       style: TextStyle(
                                         fontWeight: FontWeight.bold,
                                         fontSize: 25,
+                                        color: Colors.deepOrange,
                                       )),
                                 )),
                           ),
@@ -129,6 +133,22 @@ class _TipCounterState extends State<TipCounter> {
                       ),
                     ],
                   ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text("Tip"),
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Text(
+                            "\$$_tip",
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.bold,
+                              color: Colors.deepOrange,
+                            ),
+                          ),
+                        ),
+                      ]),
                 ],
               ),
             ),
