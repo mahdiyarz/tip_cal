@@ -31,14 +31,29 @@ class _TipCounterState extends State<TipCounter> {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  const Text('data'),
-                  const Text('\$235'),
+                  const Text(
+                    'Total Per Person',
+                    style: TextStyle(
+                      fontSize: 27,
+                      color: Colors.deepOrange,
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(10.0),
+                    child: Text(
+                      '\$235',
+                      style: TextStyle(
+                        fontSize: 25,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.deepOrange,
+                      ),
+                    ),
+                  ),
                 ],
               ),
             ),
             Container(
               width: 350,
-              height: 400,
               margin: const EdgeInsets.only(top: 10),
               padding: const EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -52,10 +67,19 @@ class _TipCounterState extends State<TipCounter> {
                     keyboardType:
                         const TextInputType.numberWithOptions(decimal: true),
                     decoration: const InputDecoration(
+                      enabledBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                      ),
+                      focusedBorder: UnderlineInputBorder(
+                        borderSide: BorderSide(color: Colors.amberAccent),
+                      ),
                       prefixText: "Bill Amount",
-                      prefixIcon: Icon(Icons.attach_money),
+                      prefixIcon: Icon(
+                        Icons.attach_money,
+                        color: Colors.amberAccent,
+                      ),
                     ),
-                    style: const TextStyle(color: Colors.deepOrangeAccent),
+                    style: const TextStyle(color: Colors.deepOrange),
                     onChanged: (String value) {
                       try {
                         _billAmount = double.parse(value);
@@ -85,7 +109,7 @@ class _TipCounterState extends State<TipCounter> {
                               height: 40,
                               margin: const EdgeInsets.all(10),
                               decoration: BoxDecoration(
-                                color: Colors.amber.shade100,
+                                color: Colors.amberAccent.shade100,
                                 borderRadius: BorderRadius.circular(10),
                               ),
                               child: const Center(
@@ -118,7 +142,7 @@ class _TipCounterState extends State<TipCounter> {
                                 height: 40,
                                 margin: const EdgeInsets.all(10),
                                 decoration: BoxDecoration(
-                                  color: Colors.amber.shade100,
+                                  color: Colors.amberAccent.shade100,
                                   borderRadius: BorderRadius.circular(10),
                                 ),
                                 child: const Center(
@@ -165,9 +189,14 @@ class _TipCounterState extends State<TipCounter> {
                       Slider(
                         min: 0,
                         max: 100,
+                        activeColor: Colors.amberAccent,
+                        inactiveColor: Colors.grey,
+                        divisions: 10,
                         value: _tipPeresent.toDouble(),
                         onChanged: (double value) {
-                          _tipPeresent = value.round();
+                          setState(() {
+                            _tipPeresent = value.round();
+                          });
                         },
                       ),
                     ],
