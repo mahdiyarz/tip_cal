@@ -10,8 +10,8 @@ class TipCounter extends StatefulWidget {
 class _TipCounterState extends State<TipCounter> {
   double _billAmount = 0.0;
   int _person = 1;
-  double _tip = 0.0;
   int _tipPeresent = 10;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,8 +41,8 @@ class _TipCounterState extends State<TipCounter> {
                   Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      '\$235',
-                      style: TextStyle(
+                      '\$ ${calculateTotalPerPerson(_billAmount, calculateTotalTip(_billAmount, _tipPeresent), _person)}',
+                      style: const TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
                         color: Colors.deepOrange,
@@ -165,7 +165,7 @@ class _TipCounterState extends State<TipCounter> {
                       Padding(
                         padding: const EdgeInsets.all(10.0),
                         child: Text(
-                          "\$$_tip",
+                          "\$${calculateTotalTip(_billAmount, _tipPeresent).toStringAsFixed(2)}",
                           style: const TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
@@ -208,5 +208,28 @@ class _TipCounterState extends State<TipCounter> {
         ),
       ),
     );
+  }
+
+  calculateTotalPerPerson(double billAmount, double totalTip, int splitBy) {
+    double totalPerPerson = 0.0;
+
+    if (billAmount.toString().isEmpty || billAmount < 1 || billAmount == null) {
+      // do nothing
+    } else {
+      totalPerPerson = (billAmount + totalTip) / splitBy;
+    }
+
+    return totalPerPerson.toStringAsFixed(2);
+  }
+
+  calculateTotalTip(double billAmount, int tipPerestage) {
+    double totalTip = 0.0;
+    if (billAmount.toString().isEmpty || billAmount < 1 || billAmount == null) {
+      // do nothing
+    } else {
+      totalTip = (billAmount * tipPerestage) / 100;
+    }
+
+    return totalTip;
   }
 }
